@@ -3,11 +3,10 @@
 ##  Javascript e TypeScript - front-end e back-end (Full Stack) - Node, Express, noSQL, React, hooks, Redux, Design Patterns
 
 <h1 align="center">
-    O que aprenderá
+    Fundamentos
 </h2>
 <p>
     <ul>
-        <li>O que você aprenderá</li>
         <li>JavaScript Básico, Funcional e Orientado a Objetos (ES6+, front-end e back-end)</li>
         <li>TypeScript - um superset do JavaScript com tipagem estática (front-end e back-end)</li>
         <li>TypeScript - um superset do JavaScript com tipagem estática (front-end e back-end)</li>
