@@ -19,7 +19,7 @@ function meuEscopo() {
         
         console.log(pessoas);
         // console.log(pessoas[0].nome) // Eduardo
-
+        resultado.innerHTML = '';
         resultado.innerHTML += `<p>O nome é: ${nome.value}</p<br />`;
         resultado.innerHTML += `<p>O sobrenome é: ${sobrenome.value}</p<br />`;
         resultado.innerHTML += `<p>O peso é: ${peso.value} Kg</p<br />`;
