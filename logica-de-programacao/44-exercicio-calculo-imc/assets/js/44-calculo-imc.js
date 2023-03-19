@@ -1,4 +1,3 @@
-// Parar o envio do formulário:
 const form = document.querySelector('#formulario');
 const resultado = document.querySelector('#resultado');
 const peso = document.querySelector('#peso');
@@ -11,8 +10,10 @@ function validateAltura () {
         alert('Altura inválida. Coloque no formato x.xx');
     }
 }
-
-
+function setResultado (msg) {
+    resultado.innerHTML = msg;
+    resultado.classList.add('paragraph-imc')
+}
 function recebeEventoForm (e) {
     e.preventDefault(); // para o envio do formulario
     const IMC = (peso.value / (altura.value * altura.value)).toFixed(2);
@@ -32,7 +33,7 @@ function recebeEventoForm (e) {
     } else {
         faixaIMC = 'Inexistente';
     }
-    console.log(`O IMC é ${IMC} Kg/m² (${faixaIMC}).`);
+    setResultado(`O IMC é ${IMC} Kg/m² (${faixaIMC}).`)
 }
 
 form.addEventListener('submit', validateAltura);

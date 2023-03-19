@@ -65,3 +65,13 @@ form button:hover {
 .bad {
   background: rgb(255, 150, 150);
 }
+
+
+.paragraph-imc {
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--primary-color);
+  text-align: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
