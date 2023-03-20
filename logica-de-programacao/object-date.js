@@ -13,5 +13,5 @@ function formataData(data) {
 }
 
 
-const data = new Date();
-const dataBrasil = formataData(data);
+const data = new Date(); // Mon Mar 20 2023 19:08:11 GMT-0300 (Horário Padrão de Brasília)
+const dataBrasil = formataData(data); // 20/02/2023 19:08:11
