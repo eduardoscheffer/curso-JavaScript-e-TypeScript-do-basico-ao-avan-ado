@@ -28,7 +28,7 @@ const homem = {
 
 const { nome: variavelProNome = 'Fallback caso não existir', sobrenome: variavelProSobrenome, idade: variavelPraIdade = 20,  endereco: { rua: r = 123, numero }, endereco: enderecoCompleto } = homem; // atribuição via desestruturação // 
 console.log(variavelProNome, variavelProSobrenome, variavelPraIdade); // Ragnar Lothbrock 25
-console.log(r, numero, enderecoCompleto); // Valhalla 1602 endereco: { rua: 'Valhalla', numero: 1602 }
+console.log(r, numero, enderecoCompleto); // Valhalla 1602 { rua: 'Valhalla', numero: 1602 }
 
 
 const mulher = {
