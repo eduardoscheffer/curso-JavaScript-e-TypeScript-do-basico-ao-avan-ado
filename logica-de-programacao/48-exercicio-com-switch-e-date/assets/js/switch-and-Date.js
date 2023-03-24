@@ -50,7 +50,14 @@
 // FAZENDO O MESMO CÓDIGO MAS USANDO A FUNÇÃO toLocaleString():
 const resultado = document.querySelector('.container h1')
 const data = new Date();
+const body = document.querySelector('.body');
 
+window.document.addEventListener('click', (e) => {
+    body.style.backgroundColor = 'red';
+    setTimeout(() => {
+        body.style.backgroundColor = 'black';
+    }, 3000) 
+})
 console.log(data.toLocaleDateString('pt-BR', { dateStyle: 'full' }))
 console.log(data.toLocaleTimeString('pt-BR', { timStyle: 'short' }));
 
