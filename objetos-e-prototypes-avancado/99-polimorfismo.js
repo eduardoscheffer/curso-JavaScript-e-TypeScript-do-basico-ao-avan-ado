@@ -10,12 +10,12 @@ class Conta {
 }
 
 // metodo que loga o saldo da conta no console
-Object.prototype.verSaldo = function () {
+Conta.prototype.verSaldo = function () {
     console.log(`Ag/c: ${this.agencia}/${this.conta} | ` + `Saldo: R$${this.saldo.toFixed(2)}`);
 }
 
 // metodo que saca o dinheiro da conta
-Object.prototype.sacar = function (valor) {
+Conta.prototype.sacar = function (valor) {
     if (valor > this.saldo) {
         console.log(`Saldo infuficiante: ${this.saldo}`);
         return;
@@ -25,7 +25,7 @@ Object.prototype.sacar = function (valor) {
 }
 
 // metodo que deposita dinheiro na conta
-Object.prototype.depositar = function (valor) {
+Conta.prototype.depositar = function (valor) {
     this.saldo += valor;
     this.verSaldo();
 }
@@ -57,7 +57,7 @@ ContaCorrente.prototype.sacar = function(valor) {
 const contaCC = new ContaCorrente('3070', '147036', 100, 500)
 // agora sacar na conta corrente tem um limite (cheque-especial) de R$ 500,00;
 
-// console.log(contaCC); 
+console.log(contaCC); 
 /*
 ContaCorrente {
   agencia: '3070',
