@@ -1,117 +1,102 @@
-class ValidaFormulario {
+class ValidaForm {
   constructor() {
-    this.formulario = document.querySelector('.formulario'); // botao de submit
-    this.eventos(); // chama o metodo eventos da classe
+      this.formulario = document.querySelector('.formulario');
+      this.events();
   }
 
-  eventos() {
-    this.formulario.addEventListener('submit', e => {
-      this.handleSubmit(e);
-    });
+  events() {
+      this.formulario.addEventListener('submit', e => {
+          this.handleSubmit(e);
+      });
   }
 
   handleSubmit(e) {
-    e.preventDefault(); // para o envio do formulario
-    const camposValidos = this.camposSaoValidos();
-    const senhasValidas = this.senhasSaoValidas();
+      e.preventDefault();
+      const validFields = this.validateFields();
+      const validPassword = this.validatePasswords();
 
-    if(camposValidos && senhasValidas) { // se camposValidos e senhasValidas forem true
-      alert('Formulário enviado.');
-      this.formulario.submit(); // envia o formulario
-    }
+      if(validFields && validPassword) {
+        alert('Formulário enviado!');
+        this.formulario.submit();
+      }
   }
 
-  senhasSaoValidas() {
-    let valid = true;
+  validateFields() {
+      let valid = true;
 
-    const senha = this.formulario.querySelector('.senha');
-    const repetirSenha = this.formulario.querySelector('.repetir-senha');
-
-    if(senha.value !== repetirSenha.value) {
-      valid = false;
-      this.criaErro(senha, 'Campos senha e repetir senha precisar ser iguais.');
-      this.criaErro(repetirSenha, 'Campos senha e repetir senha precisar ser iguais.');
-    }
-
-    if(senha.value.length < 6 || senha.value.length > 12) {
-      valid = false;
-      this.criaErro(senha, 'Senha precisa estar entre 6 e 12 caracteres.');
-    }
-
-    return valid;
-  }
-
-  camposSaoValidos() {
-    let valid = true;
-
-    for(let errorText of this.formulario.querySelectorAll('.error-text')) {
-      errorText.remove();
-    }
-
-    for(let campo of this.formulario.querySelectorAll('.validar')) {
-      const label = campo.previousElementSibling.innerText;
-
-      if(!campo.value) {
-        this.criaErro(campo, `Campo "${label}" não pode estar em branco.`);
-        valid = false;
+      for (let error of this.formulario.querySelectorAll('.error-text')) {
+          error.remove();
       }
 
-      if(campo.classList.contains('cpf')) {
-        if(!this.validaCPF(campo)) valid = false;
+      for(let field of this.formulario.querySelectorAll('.validar')) {
+          if(!field.value) {
+              this.createError(field, `Campo não pode ficar em branco.`)
+          }
+
+          if(field.classList.contains('cpf')) {
+            if(!this.validaCpf(field)) valid = false;
+          }
+
+          if(field.classList.contains('usuario')) {
+            if(!this.validaUser(field)) valid = false;
+          }
       }
 
-      if(campo.classList.contains('usuario')) {
-        if(!this.validaUsuario(campo)) valid = false;
-      }
-
-    }
-
-    return valid;
+      return valid;
   }
 
-  validaUsuario(campo) {
-    const usuario = campo.value;
-    let valid = true;
-
-    if(usuario.length < 3 || usuario.length > 12) {
-      this.criaErro(campo, 'Usuário precisa ter entre 3 e 12 caracteres.');
-      valid = false;
-    }
-
-    if(!usuario.match(/^[a-zA-Z0-9]+$/g)) {
-      this.criaErro(campo, 'Nome de usuário precisar conter apenas letras e/ou números.');
-      valid = false;
-    }
-
-    return valid;
-  }
-
-  validaCPF(campo) {
-    const cpf = new ValidaCPF(campo.value);
+  validaCpf(field) {
+    const cpf = new ValidaCPF(field.value);
 
     if(!cpf.valida()) {
-      this.criaErro(campo, 'CPF inválido.');
+      this.createError(field, `CPF Inválido`);
       return false;
     }
-
     return true;
   }
 
-  //----Metodo que cria uma div abaixo do campo do formulario-----//
-  criaErro(campo, msg) {
-    const div = document.createElement('div');
-    div.innerHTML = msg; // 
-    div.classList.add('error-text'); //
-    //------Cria uma div de class="error-text" e conteudo igual a msg abaixo do campo informado------//
-    campo.insertAdjacentElement('afterend', div); // this.formulario.querySelector('.senha').insertAdjacentElement('afterend', div);
+  validaUser(field) {
+    let valid = true;
+    const usuario = field.value;
 
-    // Ex:
-    /*
-    <label>Senha</label>
-    <input type="passowrd" class="senha validar"></input>
-    <div class="error-text">Senha precisa estar entre 6 e 12 caracteres.</div>
-    */
+    if(usuario.length < 3 || usuario.length > 12) {
+      this.createError(field, `Usuario deve ter entre 3 e 12 caracteres`);
+      valid = false;
+    }
+    if(!usuario.match(/^[a-zA-Z0-9]+$/g)) {
+      this.createError(field, `Usuário deve conter letras e/ou números`);
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  validatePasswords() {
+    let valid = true;
+
+    const senha = this.formulario.querySelector('.senha');
+    const repeatSenha = this.formulario.querySelector('.repetir-senha');
+
+    if(senha.value !== repeatSenha.value) {
+      this.createError(senha, 'Senha e repetir senha devem ser iguais');
+      this.createError(repeatSenha, 'Senha e repetir senha devem ser iguais');
+      valid = false;
+    }
+    if(senha.value.length < 6 || repeatSenha.value.length > 12) {
+      this.createError(senha, `Senha deve ter entre 6 e 12 caracteres`);
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  createError(field, msg) {
+      const div = document.createElement('div');
+      div.innerHTML = msg;
+      div.classList.add('error-text');
+
+      field.insertAdjacentElement('afterend', div);
   }
 }
 
-const valida = new ValidaFormulario();
+const valida = new ValidaForm();
