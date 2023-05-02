@@ -54,3 +54,6 @@ gerarSenha.addEventListener('click', () => {
         chkSimbolos.checked // true/false se a opcao tiver marcada
         );
 });
+
+// regex pra validar a senha: https://regex101.com/r/vNXcbw/1
+// /(?=.*[}{,.^?~=+\-_\/*\-+.\|])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}/gm
