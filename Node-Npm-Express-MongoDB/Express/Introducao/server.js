@@ -10,8 +10,8 @@ const app = express(); // cria uma instancia do express na variavel app
 app.get('/', (req, res) => { // metodo get que entrega um formulario quando o cliente acessa a rota '/'
     res.send(`
     <form action ="/" method="POST">
-    Nome: <input type="text" name="nome">
-    <button>Enviar</button>
+    Usuário: <input type="text" name="nome">
+    <button>Enviar Formulário</button>
     </form>
     `); // envia pra rota o formulário
 });
