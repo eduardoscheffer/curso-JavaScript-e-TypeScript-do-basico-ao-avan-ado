@@ -13,3 +13,5 @@ route.post('/', homeController.trataPost);
 route.get('/contato', contatoController.paginaInicial);
 
 module.exports = route;
+
+console.log(contatoController)

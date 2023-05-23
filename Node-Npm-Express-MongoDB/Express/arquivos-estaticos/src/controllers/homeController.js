@@ -1,6 +1,6 @@
 exports.paginaInicial = (req, res) => {
 
-    res.render('index'); // envia pra rota o formulário
+    res.render('index'); // envia pra rota a pagina
 
 };
 
