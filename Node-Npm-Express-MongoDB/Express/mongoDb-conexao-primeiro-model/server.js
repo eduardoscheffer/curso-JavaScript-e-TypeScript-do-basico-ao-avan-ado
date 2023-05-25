@@ -1,9 +1,11 @@
+require('dotenv').config(); // importa o uso do dotenv pra aplicação
+
 const express = require('express'); // importa o express
 const app = express(); // cria uma instancia do express na variavel app
 
 const mongoose = require('mongoose');
-const connectionString = 'mongodb+srv://eduescr:<password>@primeiroserver.uemipdu.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(connectionString) // retorna uma promise
+
+mongoose.connect(process.env.CONNECTIONSTRING) // retorna uma promise
     .then(() => {
         console.log('Conectei a base de dados');
         app.emit('pronto'); // emite um sinal pro app quando a db estiver conectada
@@ -29,7 +31,6 @@ app.on('pronto', () => { // quando o app receber a mensagem 'pronto', parte pra 
         console.log(`Servidor rodando na porta 3000: http://localhost:3000/`);
     });
 })
-
 
 
 

@@ -3,13 +3,6 @@ const route = express.Router();
 const homeController = require('./src/controllers/homeController');
 const contatoController = require('./src/controllers/contatoController');
 
-// funcao middleWare:
-function meuMiddleWare (req, res, next) {
-    console.log();
-    console.log('Passei pelo middleware');
-    console.log();
-    next(); // aqui o middleware delega a proxima funcao a ser executada
-}
 
 // metodo get que entrega um formulario quando o cliente acessa a rota '/'
 
