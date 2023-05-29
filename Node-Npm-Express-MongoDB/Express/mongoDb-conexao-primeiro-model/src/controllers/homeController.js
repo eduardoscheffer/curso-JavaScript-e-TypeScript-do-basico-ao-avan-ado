@@ -39,7 +39,9 @@ const HomeModel = require('../models/HomeModel'); // importa o model HomeModel
 
 exports.paginaInicial = (req, res) => {
 
-    res.render('index'); // envia pra rota a pagina
+    res.render('index', {
+        titulo: 'Este é o titulo da página.'
+    }); // envia pra rota a pagina index.ejs e um objeto com as variaveis num objeto
 
 
 };

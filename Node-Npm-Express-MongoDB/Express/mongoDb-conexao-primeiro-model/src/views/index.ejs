@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%- include('./includes/head') %>
+<!-- tag ejs que puxa um html pre pronto já -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Modelo</title>
-</head>
 
-<body>
 
   <section class="container">
-    <h1>Lorem ipsum dolor sit amet</h1>
+    <!-- puxa uma variavel do controller -->
+    <h1> <%= titulo %> </h1>
     <form action="/" method="post">
       <label>Cliente</label>
       <!-- atributo name eh a chave do objeto req.body no backend -->
       <input type="text" name="nomeCliente"> 
-      <button type="submit">submit</button>
+      <button type="submit">Submit</button>
     </form>
   </section>
 
-  <script src="./assets/js/bundle.js"></script>
-</body>
-
-</html>
+<%- include('./includes/footer') %>
