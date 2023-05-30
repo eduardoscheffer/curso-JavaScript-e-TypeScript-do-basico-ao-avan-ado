@@ -12,12 +12,16 @@ mongoose.connect(process.env.CONNECTIONSTRING) // retorna uma promise
     })
     .catch(e => console.log(e));
 
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const session = require('express-session'); // importa o uso de sessions pro projeto. Cada vez que o usuario logar no vavegador, salva uma session dele. Por padrão se salva na memória, mas utilizando MongoStore essa session é salva no banco de dados
+const MongoStore = require('connect-mongo'); // utlizado pra dizer que as sessoões vao ser salvas na base de dados e não na memória como é o padrão
 const flash = require('connect-flash');
 const routes = require('./routes'); // importa as rotas
 const path = require('path'); // importa o uso do path
-const { middleWareGlobal } = require('./src/middlewares/middleware'); // importa o(s) middleware(s) globais
+const helmet = require('helmet'); // importa o uso do helmet pro projeto
+const csrf = require('csurf');
+const { middleWareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware'); // importa o(s) middleware(s) globais
+
+app.use(helmet());
 
 app.use(express.urlencoded( {extended: true} )); // diz pro express pra tratar os dados do req.body
 app.use(express.json());
@@ -41,7 +45,10 @@ app.use(flash());
 
 app.set('views', path.resolve(__dirname, 'src', 'views')); // configura o express pra usar os views
 app.set('view engine', 'ejs'); // seta a engine do 'html' pra ser a ejs
+app.use(csrf());
 app.use(middleWareGlobal); // configura o express pra usar o middleware global em todas as rotas em todos os metodos
+app.use(checkCsrfError);
+app.use(csrfMiddleware);
 app.use(routes); // configura o express pra usar as rotas
 
 
