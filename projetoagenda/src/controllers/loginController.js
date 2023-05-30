@@ -7,7 +7,7 @@ exports.index = (req, res) => {
 
 exports.register = async function(req, res) {
   try {
-    const login = new Login(req.body); // crio uma instancia da classe Login na variavel login
+    const login = new Login(req.body); // crio uma instancia da classe Login - que se encontra nos models do projeto - na variavel login
     await login.register(); // chamo o método register() da classe
 
     if(login.errors.length > 0) { // se a array errors da classe tiver algo:
