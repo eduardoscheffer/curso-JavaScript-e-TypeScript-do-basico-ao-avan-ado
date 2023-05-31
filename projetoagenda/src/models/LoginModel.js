@@ -10,8 +10,20 @@ const LoginSchema = new mongoose.Schema({
 const LoginModel = mongoose.model('Login', LoginSchema);
 
 class Login {
-  constructor(body) {
+  constructor(body) { // body enviado aqui será o req.body do form
+    /*
+    req.body = {
+      email: "fulanodasilva91@gmail.com",
+      password: "123456789"
+    }
+    */
     this.body = body;
+    /*
+    this.body = {
+      email: req.body.email,
+      password: req.body.password
+    };
+    */
     this.errors = [];
     this.user = null;
   }
@@ -19,13 +31,14 @@ class Login {
   async login() {
     this.valida();
     if(this.errors.length > 0) return;
-    this.user = await LoginModel.findOne({ email: this.body.email });
+    this.user = await LoginModel.findOne({ email: this.body.email }); // retorna da database com uma collection(objeto) contendo o usuario que quer logar
 
-    if(!this.user) {
+    if(!this.user) { // se não achar o usuario na database
       this.errors.push('Usuário não existe.');
       return;
     }
 
+    // faz o processo inverso do hash do cadastro, comparando a a password do req.body.password com a do this.user.password
     if(!bcryptjs.compareSync(this.body.password, this.user.password)) {
       this.errors.push('Senha inválida');
       this.user = null;

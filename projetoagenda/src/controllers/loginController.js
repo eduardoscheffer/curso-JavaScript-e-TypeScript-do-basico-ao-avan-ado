@@ -32,7 +32,7 @@ exports.register = async function(req, res) {
 exports.login = async function(req, res) {
   try {
     const login = new Login(req.body);
-    await login.login();
+    await login.login(); // faz as validações no LoginModel
 
     if(login.errors.length > 0) {
       req.flash('errors', login.errors);
@@ -42,8 +42,9 @@ exports.login = async function(req, res) {
       return;
     }
 
-    req.flash('success', 'Você entrou no sistema.');
-    req.session.user = login.user;
+    // caso todo os testes derem certo no Login.login, salva o email na key login.user:
+    req.flash('success', 'Você entrou no sistema.'); // manda um flash pro ejs
+    req.session.user = login.user; // salva a sessão do usuario/navegador
     req.session.save(function() {
       return res.redirect('back');
     });
@@ -53,8 +54,8 @@ exports.login = async function(req, res) {
   }
 };
 
-exports.logout = function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
+exports.logout = function(req, res) { // controller de logout
+  req.session.destroy(); // destroi a sessão do usuario
+  res.redirect('/'); // redireciona o usuario pra home
 };
 
