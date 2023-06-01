@@ -8,8 +8,8 @@ exports.index = (req, res) => {
 
 exports.register = async(req, res) => {
   try {
-    const contato = new Contato(req.body);
-    await contato.register();
+    const contato = new Contato(req.body); // envia os parametros do form pra classe Contato e instancia na variavel contato
+    await contato.register(); // chama o método register() do ContatoModel
 
     if(contato.errors.length > 0) {
       req.flash('errors', contato.errors);
@@ -18,7 +18,7 @@ exports.register = async(req, res) => {
     }
 
     req.flash('success', 'Contato registrado com sucesso.');
-    req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
+    req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`)); // salva a sessão e redireciona o usuario pra página /contato/index/:id
     return;
   } catch(e) {
     console.log(e);
@@ -29,10 +29,10 @@ exports.register = async(req, res) => {
 exports.editIndex = async function(req, res) {
   if(!req.params.id) return res.render('404');
 
-  const contato = await Contato.buscaPorId(req.params.id);
+  const contato = await Contato.buscaPorId(req.params.id); // chama o metodo buscaPorId do ContatoModel e salva na variavel contato
   if(!contato) return res.render('404');
 
-  res.render('contato', { contato });
+  res.render('contato', { contato }); // renderiza a pagina contato.ejs e manda a variavel contato pra engine do ejs usar
 };
 
 exports.edit = async function(req, res) {

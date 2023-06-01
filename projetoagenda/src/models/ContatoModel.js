@@ -18,9 +18,9 @@ function Contato(body) {
 }
 
 Contato.prototype.register = async function() {
-  this.valida();
+  this.valida(); // valida os inputs do usuario
   if(this.errors.length > 0) return;
-  this.contato = await ContatoModel.create(this.body);
+  this.contato = await ContatoModel.create(this.body); // salva na db e localmente na key contato
 };
 
 Contato.prototype.valida = function() {
@@ -60,7 +60,7 @@ Contato.prototype.edit = async function(id) {
 // Métodos estáticos
 Contato.buscaPorId = async function(id) {
   if(typeof id !== 'string') return;
-  const contato = await ContatoModel.findById(id);
+  const contato = await ContatoModel.findById(id); // busca na db o contato pelo id passado na req.params.id la do controller e retorna a collection completa e salva na variavel contato
   return contato;
 };
 
