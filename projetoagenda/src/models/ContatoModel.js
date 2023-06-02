@@ -55,6 +55,13 @@ Contato.prototype.edit = async function(id) {
   this.valida();
   if(this.errors.length > 0) return;
   this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
+  /*
+  this.contato = {
+    _id: "5db846c111285014bb12808",
+    sobrenome: "Mendes"
+    email:
+  }
+  */
 };
 
 // Métodos estáticos
